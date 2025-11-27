@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /*
 인터넷 초기의 사용자/로그인 구현 방식
@@ -17,21 +18,25 @@ User 객체의 Role Field로 권한 체크
 @Repository
 public class CGIUserRepository {
 
-    // 가상 DB Map
-    private final Map<String , User> userMap = new HashMap<>();
+    private final Logger logger = Logger.getLogger(CGIUserRepository.class.getName());
 
-    public String save(User user){
-        userMap.put(user.getUsername(), user);
-        return "save new User";
+    // 가상 DB Map
+    private final Map<String , User> CGIuserDB = new HashMap<>();
+
+    public void save(User user){
+        CGIuserDB.put(user.getUsername(), user);
+        // DB 상태 출력
+        for(Map.Entry<String, User> userEntry : CGIuserDB.entrySet()){
+            logger.info(userEntry.getKey() + " : " + userEntry.getValue());
+        }
     }
 
     public User findByUsername(String username){
-        return userMap.get(username); // HashMap은 Key로 Value를 가져옴 .get() Method
+        return CGIuserDB.get(username); // DB에서 user를 get
     }
 
-    public String delete(String username){
+    public void delete(String username){
         User user = findByUsername(username);
         user = null;
-        return "removed User";
     }
 }

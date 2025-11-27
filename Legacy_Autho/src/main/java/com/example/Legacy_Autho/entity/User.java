@@ -2,12 +2,16 @@ package com.example.Legacy_Autho.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import org.springframework.stereotype.Component;
 
+@Component
 public class User {
 
     private String username;
     private String password;
     private String role; // "USER" 또는 "ADMIN"
+
+    public User(){}
 
     public User(String username, String password, String role) {
         this.username = username;
