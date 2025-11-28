@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import org.springframework.stereotype.Component;
 
-@Component
 public class User {
 
     private String username;
