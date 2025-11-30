@@ -17,6 +17,9 @@ public class LoginController {
 
     private final LoginService loginService;
 
+
+    // Tomcat(HttpServletRequest/HttpServletResponse) -> DispatcherSerblet -> Controller
+    //
     public LoginController(LoginService loginService) {
         this.loginService = loginService;
     }

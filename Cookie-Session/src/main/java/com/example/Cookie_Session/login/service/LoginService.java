@@ -29,9 +29,11 @@ public class LoginService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인 실패");
         }
 
+        // UUID (랜덤 Hash값으로 SESSIONID 지정)
         String sessionId = UUID.randomUUID().toString();
         SessionStore.put(sessionId, user);
 
+        // Cookie 생성자 호출
         Cookie cookie = new Cookie("SESSIONID", sessionId);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
