@@ -3,12 +3,8 @@ package com.example.Cookie_Session_ResponseEntity.login.controller;
 import com.example.Cookie_Session_ResponseEntity.login.dto.LoginRequstDto;
 import com.example.Cookie_Session_ResponseEntity.login.dto.LoginResponseDto;
 import com.example.Cookie_Session_ResponseEntity.login.service.LoginService;
-import com.example.Cookie_Session_ResponseEntity.login.session.SessionStore;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -27,11 +23,19 @@ public class LoginController {
 
         LoginResponseDto loginResponseDto = loginService.loginAuthentication(loginRequstDto);
 
-        // Header - Cookie 주고
+        // Header - Cookie
         // Body - Message(String)
         return ResponseEntity
                 .ok()
                 .header("Set-Cookie", "SESSIONID=" + loginResponseDto.getSessionId() + "; HttpOnly; Path=/")
                 .body(loginResponseDto.getMessage());
+    }
+
+    @DeleteMapping("/logout")
+    public ResponseEntity<String> logout(@CookieValue(value = "SESSIONID", required = false) String sessionId){
+        String message = loginService.logout(sessionId);
+        return ResponseEntity
+                .ok()
+                .body(message);
     }
 }
