@@ -45,8 +45,11 @@ public class LoginService {
             SessionStore.remove(sessionId);
             SessionStore.SessionStatus();
             return "로그아웃 성공!";
+
         } else {
             return "잘못된 접근입니다.";
         }
     }
+
+
 }
