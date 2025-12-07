@@ -27,7 +27,7 @@ public class AuthInterceptor implements HandlerInterceptor{
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // Cookie에서 추출한 SessionId 초기화
+        // Cookie에서 추출한 SessionId 초기화.
         String sessionId = null;
 
         // 클라이언트 측의 Cookie를 배열로 받아옴
@@ -44,7 +44,7 @@ public class AuthInterceptor implements HandlerInterceptor{
                 }
             }
         } else {
-             throw new RuntimeException("로그인 필요");
+             throw new RuntimeException("");
         }
 
         // 쿠키에 세션이 존재하지 않을때

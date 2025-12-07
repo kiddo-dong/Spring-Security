@@ -24,6 +24,9 @@ public class UserController {
                 .ok("성공적으로 저장됨");
     }
 
+
+    // Basic Authentication
+    // base64(username) | base64(password)
     @GetMapping
     public ResponseEntity<String> getUser(@RequestHeader("Authorization") String auth) {
         if (auth == null || !auth.startsWith("Basic ")) {
@@ -33,6 +36,7 @@ public class UserController {
         String base64Credentials = auth.substring("Basic ".length());
         String decoded = new String(Base64.getDecoder().decode(base64Credentials));
 
+        // Split & Mapping
         String[] parts = decoded.split(":");
         String username = parts[0];
         String password = parts[1];

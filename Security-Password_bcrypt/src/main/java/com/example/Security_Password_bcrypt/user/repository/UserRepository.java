@@ -1,10 +1,10 @@
-package com.example.Basic_Authentication.user.repository;
+package com.example.Security_Password_bcrypt.user.repository;
 
-import com.example.Basic_Authentication.user.entity.User;
+import com.example.Security_Password_bcrypt.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
+// CRUD
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
 }

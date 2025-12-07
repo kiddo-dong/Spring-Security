@@ -20,7 +20,10 @@ public class UserService {
 
     public User findUser(String username, String password){
         // DB에서 User 검색
+        // JPA로 DB 검색
         User user = userRepository.findByUsername(username);
+
+        // Find logic Exception 처리
         if(user == null){
             throw new RuntimeException("사용자를 찾을 수 없습니다.");
         }
@@ -28,6 +31,7 @@ public class UserService {
         if(username.equals(user.getUsername()) && password.equals(user.getPassword())){
             return user;
         } else {
+            // Equals logic Exception 처리
             throw new RuntimeException("사용자 이름 및 비밀번호가 일치하지 않습니다.");
         }
     }
