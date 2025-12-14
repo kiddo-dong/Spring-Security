@@ -12,7 +12,7 @@ public class Main {
         payload.put("role", "USER");
         payload.put("exp", System.currentTimeMillis()/1000 + 3600); // +1h // 토큰 만료 시간
 
-        byte[] secret = "띠리리리리릴".getBytes(); // 비밀키 서버는 한개의 비밀키를 가지고 있음
+        byte[] secret = "KEY".getBytes(); // 비밀키 서버는 한개의 비밀키를 가지고 있음
 
         String token = SimpleJWT.createToken(header, payload, secret); //
         System.out.println("JWT = " + token);
