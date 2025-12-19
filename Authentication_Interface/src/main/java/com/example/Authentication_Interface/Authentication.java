@@ -12,6 +12,11 @@ import java.util.Collection;
 // AuthenticationFilter를 이해하기 위해
 // Authentication <<Interface>>와 구현체를 이해해야한다.
 
+
+// Client 측에서 넘어온 데이터를 담는 상태 객체
+// User 객체
+// Token 종류
+// Role 등을 담음
 public interface Authentication extends Principal, Serializable {
 
     // 인증

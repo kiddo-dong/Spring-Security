@@ -42,11 +42,12 @@ public class SecurityContextHolderFilter {
         try {
             // Spring-Security의 FilterChain을 실행시킨다.
             // 요청을 다음 필터로 넘겨준다.
-            filterChain.doFilter(request,response);
+            filterChain.doFilter(request,response); // 해당 메소드 호출에서 SecurityFilterChain이 이루어짐
 // 스프링 시큐리티의 Context를 생성한다.        } catch (Exception e) {
             // 예외 처리..?
         } finally {
             // 요청이 끝나면 ContextHolder에서 해당하는 인스턴스의 Context를 remove 한다.
+            // LocalThread 기반
             SecurityContextHolder.clearContext();
         }
     }
