@@ -1,7 +1,5 @@
 package com.example.Spring_Security_Jpa.global.jwt;
 
-import com.example.Spring_Security_Jpa.user.domain.User;
-import com.example.Spring_Security_Jpa.user.service.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,10 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+    // JWT
     private final JwtProvider jwtProvider;
 
     @Override
-    protected void doFilterInternal(
+    protected void doFilterInternal (
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain

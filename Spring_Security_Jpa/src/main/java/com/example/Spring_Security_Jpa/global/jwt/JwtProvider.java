@@ -14,7 +14,12 @@ import java.util.Date;
 @Component
 public class JwtProvider {
 
+    // 토큰 Hash 암호화 시
+    // HMAC-256 -> SecretKey 객체
+    // RSA/EC -> PublicKey 객체
+
     // DI
+    // HMAC-256 사용으로 SecretKey 객체 사용
     private final SecretKey secretKey;
     private final long expiration;
 
@@ -43,9 +48,9 @@ public class JwtProvider {
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
-                    .verifyWith(secretKey)
-                    .build()
-                    .parseSignedClaims(token);
+                    .verifyWith(secretKey) // Signature 검증용 Key 설정
+                    .build() // JWT Parser 생성
+                    .parseSignedClaims(token); // 실제 파싱 및 검증
             return true;
         } catch (Exception e) {
             return false;

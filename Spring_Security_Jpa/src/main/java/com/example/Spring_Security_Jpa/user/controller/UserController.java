@@ -1,11 +1,10 @@
 package com.example.Spring_Security_Jpa.user.controller;
 
 import com.example.Spring_Security_Jpa.user.dto.UserInfoResponse;
-import com.example.Spring_Security_Jpa.user.dto.UserLoginRequest;
-import com.example.Spring_Security_Jpa.user.dto.UserLoginResponse;
-import com.example.Spring_Security_Jpa.user.dto.UserSignUp;
+import com.example.Spring_Security_Jpa.user.dto.UserResponse;
+import com.example.Spring_Security_Jpa.user.dto.UserUpdateRequest;
+import com.example.Spring_Security_Jpa.user.service.UserAuthService;
 import com.example.Spring_Security_Jpa.user.service.UserService;
-import com.sun.security.auth.UserPrincipal;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,28 +21,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    // 회원 가입
-    @PostMapping("/signup")
-    public ResponseEntity<Void> signUp(@RequestBody @Validated UserSignUp userSignUp) {
-
-        userService.signUp(userSignUp);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    // 로그인 -> jwt 발행
-    @PostMapping("/login")
-    public ResponseEntity<UserLoginResponse> login(@RequestBody @Validated UserLoginRequest userLoginRequest) {
-
-        return ResponseEntity
-                .ok(userService.login(userLoginRequest));
-
-    }
-
-    // GET me
+    // GET(READ)
     @GetMapping("/me")
-    public ResponseEntity<UserInfoResponse> getCurrentUser(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        UserInfoResponse userInfoResponse = userService.getMyInfo(userPrincipal.getName());
+    public ResponseEntity<UserInfoResponse> getCurrentUser(@AuthenticationPrincipal String username) {
+        UserInfoResponse userInfoResponse = userService.getMyInfo(username);
         return ResponseEntity.ok(userInfoResponse);
     }
+
+    // PUT(UPDATE)
+    @PutMapping("/update")
+    public ResponseEntity<HttpStatus> userUpdate(
+            @AuthenticationPrincipal String username,
+            @RequestBody @Validated UserUpdateRequest userUpdateRequest){
+
+        userService.userUpdate(username, userUpdateRequest);
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+
 }
