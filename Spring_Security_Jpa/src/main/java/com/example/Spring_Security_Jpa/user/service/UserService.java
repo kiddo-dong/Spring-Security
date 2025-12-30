@@ -44,6 +44,16 @@ public class UserService {
         // user Mapping logic
         // 1차 캐시 등록으로 메소드 종료시 자동 tx.commit
         userMapper.updateUserFromRequest(userUpdateRequest, user);
+    }
 
+    // delete
+    public void userDelete(String username) {
+        User user = userRepository.findByUsername(username);
+
+        if(user == null){
+            throw new IllegalStateException("User not found");
+        }
+
+        userRepository.delete(user);
     }
 }

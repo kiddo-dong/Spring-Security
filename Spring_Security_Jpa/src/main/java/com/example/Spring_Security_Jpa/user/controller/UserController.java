@@ -40,4 +40,11 @@ public class UserController {
     }
 
 
+    @DeleteMapping
+    public ResponseEntity<HttpStatus> deleteUser(
+            @AuthenticationPrincipal String username
+    ){
+        userService.userDelete(username);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 }
