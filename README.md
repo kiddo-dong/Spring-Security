@@ -21,6 +21,3 @@ Spring-Security 구성 해부
 - AnonymousAuthenticationFilter
 - ExceptionTranslationFilter
 - AuthorizationFilter
-
-각 Filter의 내부 요소들 해부
--
